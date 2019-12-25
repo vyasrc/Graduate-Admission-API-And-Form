@@ -1,11 +1,12 @@
 from django import forms
-from admission import models
+from . import models
 
 
 class GraduateAdmissionForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(GraduateAdmissionForm, self).__init__(*args, **kwargs)
+		self.fields['name'].widget.attrs['placeholder'] = 'Enter Name'
 		self.fields['gre_score'].widget.attrs['placeholder'] = 'Enter GRE Score'
 		self.fields['toefl_score'].widget.attrs['placeholder'] = 'Enter TOEFL Score'
 		self.fields['university_rating'].widget.attrs['placeholder'] = 'Enter University Rating(Out of 5)'

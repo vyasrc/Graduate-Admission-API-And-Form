@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
-from . models import GraduateAdmission
+from admission_form.models import GraduateAdmission
 from . serializers import GraduateAdmissionSerializer
 from sklearn.externals import joblib
 import numpy as np
@@ -13,6 +13,7 @@ import os
 class GraduateAdmissionView(viewsets.ModelViewSet):
 	queryset = GraduateAdmission.objects.all()
 	serializer_class = GraduateAdmissionSerializer
+	http_method_names = ['get', 'head']
 
 		
 @api_view(["POST"])

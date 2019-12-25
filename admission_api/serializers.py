@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from admission import models
+from admission_form import models
 
 
 class GraduateAdmissionSerializer(serializers.ModelSerializer):

@@ -24,6 +24,8 @@ def admission_chance_form(request):
 		form = GraduateAdmissionForm(request.POST)
 		if form.is_valid():
 			data = form.clean()
+			if 'name' in data:
+				del data['name']
 			score = admission_score(data)
 			messages.success(request, 'Your chance of admission is {}%'.format(score))
 			form.save()
