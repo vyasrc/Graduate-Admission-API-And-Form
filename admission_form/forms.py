@@ -1,33 +1,19 @@
 from django import forms
-from django.core.validators import MaxValueValidator, MinValueValidator 
 from admission import models
 
 
-class GraduateAdmissionForm(forms.Form):
+class GraduateAdmissionForm(forms.ModelForm):
 
-	gre_score = forms.IntegerField(
-		validators=[MinValueValidator(260), MaxValueValidator(340)],
-		widget = forms.NumberInput(attrs={'placeholder': 'Enter GRE Score'})
-		)
-	toefl_score = forms.IntegerField(
-		validators=[MinValueValidator(0), MaxValueValidator(120)],
-		widget = forms.NumberInput(attrs={'placeholder': 'Enter TOEFL Score'})
-		)
-	university_rating = forms.FloatField(
-		validators=[MinValueValidator(0), MaxValueValidator(5)],
-		widget = forms.NumberInput(attrs={'placeholder': 'Enter University Rating(Out of 5)'})
-		)
-	sop_rating = forms.FloatField(
-		validators=[MinValueValidator(0), MaxValueValidator(5)],
-		widget = forms.NumberInput(attrs={'placeholder': 'Enter SOP Rating(Out of 5)'})
-		)
-	lor_rating = forms.FloatField(
-		validators=[MinValueValidator(0), MaxValueValidator(5)],
-		widget = forms.NumberInput(attrs={'placeholder': 'Enter LOR Rating(Out of 5)'})
-		)
-	research = forms.ChoiceField(choices = [(0, 0), (1, 1)])
-	cgpa = forms.FloatField(
-		validators=[MinValueValidator(0), MaxValueValidator(10)],
-		widget = forms.NumberInput(attrs={'placeholder': 'Enter CGPA(Out of 10)'})
-		)
+	def __init__(self, *args, **kwargs):
+		super(GraduateAdmissionForm, self).__init__(*args, **kwargs)
+		self.fields['gre_score'].widget.attrs['placeholder'] = 'Enter GRE Score'
+		self.fields['toefl_score'].widget.attrs['placeholder'] = 'Enter TOEFL Score'
+		self.fields['university_rating'].widget.attrs['placeholder'] = 'Enter University Rating(Out of 5)'
+		self.fields['sop_rating'].widget.attrs['placeholder'] = 'Enter SOP Rating(Out of 5)'
+		self.fields['lor_rating'].widget.attrs['placeholder'] = 'Enter LOR Rating(Out of 5)'
+		self.fields['cgpa'].widget.attrs['placeholder'] = 'Enter CGPA(Out of 10)'
+
+	class Meta:
+		model = models.GraduateAdmission
+		fields = '__all__' 
 
